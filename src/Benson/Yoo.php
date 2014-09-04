@@ -12,6 +12,11 @@ use Joomla\Application\AbstractWebApplication;
 
 include_once __DIR__ . '/../vendor/autoload.php';
 
+/**
+ * Class Yoo
+ *
+ * @since 1.0
+ */
 class Yoo extends AbstractWebApplication
 {
 

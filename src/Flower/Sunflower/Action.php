@@ -10,6 +10,11 @@ namespace Flower\Sunflower;
 
 use Joomla\Registry\Registry;
 
+/**
+ * Class Action
+ *
+ * @since 1.0
+ */
 class Action
 {
 	public $config;

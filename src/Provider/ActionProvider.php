@@ -13,7 +13,6 @@ use Joomla\DI\Container;
 
 class ActionProvider implements \Joomla\DI\ServiceProviderInterface
 {
-
 	/**
 	 * Registers the service provider with a DI container.
 	 *

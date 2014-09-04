@@ -10,6 +10,11 @@ namespace Provider;
 
 use Joomla\DI\Container;
 
+/**
+ * Class WhoopsProvider
+ *
+ * @since 1.0
+ */
 class WhoopsProvider implements \Joomla\DI\ServiceProviderInterface
 {
 	/**
