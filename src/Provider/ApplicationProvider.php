@@ -1,6 +1,6 @@
 <?php
 /**
- * Part of framework-practice project.
+ * Part of learn-architecture project.
  *
  * @copyright  Copyright (C) 2011 - 2014 SMS Taiwan, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE
@@ -10,12 +10,21 @@ namespace Provider;
 
 use Flower\Application\Application;
 use Joomla\DI\Container;
+use Joomla\DI\ServiceProviderInterface;
 
-class ApplicationProvider implements \Joomla\DI\ServiceProviderInterface
+class ApplicationProvider implements ServiceProviderInterface
 {
+	/**
+	 * Property app.
+	 *
+	 * @var \Flower\Application\Application
+	 */
 	protected $app;
 
-	public function __constructor(Application $app)
+	/**
+	 * @param \Flower\Application\Application $app
+	 */
+	public function __construct(Application $app)
 	{
 		$this->app = $app;
 	}
@@ -32,6 +41,5 @@ class ApplicationProvider implements \Joomla\DI\ServiceProviderInterface
 	public function register(Container $container)
 	{
 		$container->protect('app', $this->app);
-		$container->protect('input', $this->app->input);
 	}
 }

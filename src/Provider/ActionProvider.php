@@ -1,6 +1,6 @@
 <?php
 /**
- * Part of framework-practice project. 
+ * Part of learn-architecture project.
  *
  * @copyright  Copyright (C) 2011 - 2014 SMS Taiwan, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE
@@ -8,10 +8,10 @@
 
 namespace Provider;
 
-use Flower\Sunflower\Action;
 use Joomla\DI\Container;
+use Joomla\DI\ServiceProviderInterface;
 
-class ActionProvider implements \Joomla\DI\ServiceProviderInterface
+class ActionProvider implements ServiceProviderInterface
 {
 	/**
 	 * Registers the service provider with a DI container.
@@ -24,13 +24,14 @@ class ActionProvider implements \Joomla\DI\ServiceProviderInterface
 	 */
 	public function register(Container $container)
 	{
-		$container->get('config')->set('where', 'Taipei1');
+		$container->get('config')->set('where', 'Taipei');
 
 		$container->share(
 			'sunflower.action',
-			function($container)
+			function ($container)
 			{
-				$action = new Action($container->get('config'));
+				$config = $container->get('config');
+				$action = new Action($config);
 
 				return $action;
 			}

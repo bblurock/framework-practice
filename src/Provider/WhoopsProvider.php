@@ -29,18 +29,15 @@ class WhoopsProvider implements ServiceProviderInterface
 	 */
 	public function register(Container $container)
 	{
-		if (FLOWER_DEBUG)
+		if (!defined('FLOWER_DEBUG') || !FLOWER_DEBUG)
 		{
-			$container->registerServiceProvider(new WhoopsProvider);
+			return;
 		}
 
-		$whoops = new \Whoops\Run;
-		$handler = new \Whoops\Handler\PrettyPageHandler;
-
-		$whoops->pushHandler($handler);
+		$whoops = new \Whoops\Run();
+		$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 		$whoops->register();
 
-		$container->share('woops', $whoops);
-		$container->share('woops.handler', $handler);
+		$container->share('whoops', $whoops);
 	}
 }

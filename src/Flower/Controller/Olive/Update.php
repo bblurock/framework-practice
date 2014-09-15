@@ -10,7 +10,12 @@ namespace Flower\Controller\Olive;
 
 use Joomla\Controller\AbstractController;
 
-class Get extends AbstractController
+/**
+ * Class DisplayController
+ *
+ * @since 1.0
+ */
+class Update extends AbstractController
 {
 	/**
 	 * Execute the controller.
@@ -25,6 +30,10 @@ class Get extends AbstractController
 	 */
 	public function execute()
 	{
-		echo 'Hello Olive Get';
+		$input = $this->getInput();
+
+		echo 'Oliver Create';
+
+		echo $input->get('foo') . $input->get('bar');
 	}
 }

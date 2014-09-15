@@ -1,4 +1,4 @@
 {
-	"olive/:id/:alias" : "Olive\\",
+	"olive" : "Olive\\",
 	"sakura/:catid/:slug" : "Sakura\\"
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Part of framework-practice project. 
+ * Part of learn-architecture project.
  *
  * @copyright  Copyright (C) 2011 - 2014 SMS Taiwan, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE
@@ -12,6 +12,7 @@ use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 use Joomla\Registry\Registry;
 use Joomla\Router\RestRouter;
+use Joomla\Router\Router;
 
 class RouterProvider implements ServiceProviderInterface
 {
@@ -26,12 +27,20 @@ class RouterProvider implements ServiceProviderInterface
 	 */
 	public function register(Container $container)
 	{
+		/**
+		 * Router closure
+		 *
+		 * @param Container $container
+		 *
+		 * @return  Router
+		 */
 		$closure = function($container)
 		{
 			$input = $container->get('app')->input;
 
 			$router = new RestRouter($input);
 
+			// Use "?_method=PUT" or "?_method=DELETE" to handle PUT and DELETE methods
 			$router->setMethodInPostRequest(true);
 
 			$maps = new Registry;
