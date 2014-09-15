@@ -10,13 +10,10 @@ namespace Provider;
 
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
+use Joomla\Registry\Registry;
+use Joomla\Router\RestRouter;
 
-/**
- * Class WhoopsProvider
- *
- * @since 1.0
- */
-class WhoopsProvider implements ServiceProviderInterface
+class RouterProvider implements ServiceProviderInterface
 {
 	/**
 	 * Registers the service provider with a DI container.
@@ -29,18 +26,23 @@ class WhoopsProvider implements ServiceProviderInterface
 	 */
 	public function register(Container $container)
 	{
-		if (FLOWER_DEBUG)
+		$closure = function($container)
 		{
-			$container->registerServiceProvider(new WhoopsProvider);
-		}
+			$input = $container->get('app')->input;
 
-		$whoops = new \Whoops\Run;
-		$handler = new \Whoops\Handler\PrettyPageHandler;
+			$router = new RestRouter($input);
 
-		$whoops->pushHandler($handler);
-		$whoops->register();
+			$router->setMethodInPostRequest(true);
 
-		$container->share('woops', $whoops);
-		$container->share('woops.handler', $handler);
+			$maps = new Registry;
+
+			$maps->loadFile(FLOWER_ETC . '/routing.json');
+
+			$router->addMaps($maps->toArray());
+
+			return $router;
+		};
+
+		$container->share('router', $closure);
 	}
 }
