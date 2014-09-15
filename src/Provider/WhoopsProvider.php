@@ -28,6 +28,11 @@ class WhoopsProvider implements \Joomla\DI\ServiceProviderInterface
 	 */
 	public function register(Container $container)
 	{
+		if (FLOWER_DEBUG)
+		{
+			$this->container->registerServiceProvider(new WhoopsProvider);
+		}
+
 		$whoops = new \Whoops\Run;
 		$handler = new \Whoops\Handler\PrettyPageHandler;
 
